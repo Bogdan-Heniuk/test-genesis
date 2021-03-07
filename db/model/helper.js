@@ -51,6 +51,10 @@ function getCityWithMaxQueries() {
         .where('quantity_of_queries', '=', max)
 }
 
+function truncate(){
+    return db('weather_forecast').del()
+}
+
 function getAverageTemp(city) {
     return db('weather_forecast')
         .join('cities', 'cities.id', 'weather_forecast.city_id')
@@ -66,5 +70,6 @@ module.exports = {
     getAverageTemp,
     getCities,
     incrementCityQueryCounter,
-    getCityWithMaxQueries
+    getCityWithMaxQueries,
+    truncate
 }

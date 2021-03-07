@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const dateFormat = require("dateformat");
-const {seedWeather,getCities, db} = require('./db/model/helper')
+const {seedWeather,getCities, truncate, db} = require('./db/model/helper')
 const SEVEN_DAYS_IN_MS = 604800000
 
 async function getCityWeather(city) {
@@ -13,6 +13,7 @@ async function getCityWeather(city) {
 
 
 async function seedData() {
+    await truncate()
     const cities = await getCities()
     const weatherData = await Promise.all(cities.map(city => getCityWeather(city)))
     const cityWeatherValues = weatherData.flatMap((data, index) => {
