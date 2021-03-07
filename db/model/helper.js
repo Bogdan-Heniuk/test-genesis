@@ -4,7 +4,7 @@ const config = require('../knexfile')
 const db = knex(config.development)
 
 function getCities() {
-    return db('cities').select("*")
+    return db('cities').select( 'id', 'name')
 }
 
 function seedWeather(weatherData, id) {
@@ -20,15 +20,13 @@ function seedWeather(weatherData, id) {
 }
 
 function getWeather(city, date) {
-    switch (date.replace(' ', '').toLowerCase()) {
+    switch (date.toLowerCase()) {
         case 'today' :
             date = dateFormat(Date.now(), "yyyy-mm-dd")
             break
         case 'yesterday' :
             date = dateFormat(Date.now() - 86400000, "yyyy-mm-dd")
             break
-        default:
-            date
     }
 
     return db('weather_forecast').join('cities', 'cities.id', 'weather_forecast.city_id')
@@ -51,11 +49,12 @@ function getMaxQueries() {
 
 function getAverageTemp(city) {
     return db('weather_forecast').join('cities', 'cities.id', 'weather_forecast.city_id')
-        .avg('temp')
-        .where({name: city})
+        .avg('temp as temp')
+        .where({name: city}).first()
 }
 
 module.exports = {
+    db,
     seedWeather,
     getWeather,
     getAverageTemp,

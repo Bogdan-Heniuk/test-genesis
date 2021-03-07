@@ -1,0 +1,128 @@
+[
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-01",
+    "conditions": "Clear",
+    "temp": 60,
+    "max_temp": 75.9,
+    "min_temp": 48.1,
+    "humidity": 35.85
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-02",
+    "conditions": "Clear",
+    "temp": 58.1,
+    "max_temp": 70.7,
+    "min_temp": 44.4,
+    "humidity": 38.93
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-03",
+    "conditions": "Rain, Partially cloudy",
+    "temp": 55.3,
+    "max_temp": 60.4,
+    "min_temp": 49.9,
+    "humidity": 73.95
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-04",
+    "conditions": "Rain, Partially cloudy",
+    "temp": 58.4,
+    "max_temp": 63.6,
+    "min_temp": 52.4,
+    "humidity": 70.88
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-05",
+    "conditions": "Clear",
+    "temp": 58.6,
+    "max_temp": 67.7,
+    "min_temp": 48.9,
+    "humidity": 71.62
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-06",
+    "conditions": "Partially cloudy",
+    "temp": 59.3,
+    "max_temp": 65.6,
+    "min_temp": 54,
+    "humidity": 73.47
+  },
+  {
+    "city_id": 1,
+    "calendar_date": "2021-03-07",
+    "conditions": "Partially cloudy",
+    "temp": 56.7,
+    "max_temp": 59.8,
+    "min_temp": 53.9,
+    "humidity": 71.39
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-01",
+    "conditions": "Snow, Partially cloudy",
+    "temp": 31.8,
+    "max_temp": 38,
+    "min_temp": 26.2,
+    "humidity": 59.88
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-02",
+    "conditions": "Snow",
+    "temp": 31,
+    "max_temp": 43.1,
+    "min_temp": 22,
+    "humidity": 53.51
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-03",
+    "conditions": "Snow",
+    "temp": 44.4,
+    "max_temp": 58.2,
+    "min_temp": 36,
+    "humidity": 58.15
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-04",
+    "conditions": "Snow, Partially cloudy",
+    "temp": 34.7,
+    "max_temp": 37.9,
+    "min_temp": 30.4,
+    "humidity": 68.95
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-05",
+    "conditions": "Clear",
+    "temp": 35.4,
+    "max_temp": 48.6,
+    "min_temp": 25.7,
+    "humidity": 56.28
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-06",
+    "conditions": "Clear",
+    "temp": 36,
+    "max_temp": 45.4,
+    "min_temp": 28.1,
+    "humidity": 58.09
+  },
+  {
+    "city_id": 2,
+    "calendar_date": "2021-03-07",
+    "conditions": "Partially cloudy",
+    "temp": 31.3,
+    "max_temp": 40.3,
+    "min_temp": 27.1,
+    "humidity": 69.91
+  }
+]
