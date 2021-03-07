@@ -38,11 +38,13 @@ function getWeather(city, date) {
         .where({name : city, calendar_date : date})
 }
 
-function incrementQueries(city) {
+function incrementCityQueryCounter(city) {
     return db('cities').where('name', '=', city).increment({quantity_of_queries: 1})
 }
 
-function getMaxQueries() {
+
+
+function getCityWithMaxQueries() {
     const max = db('cities').max('quantity_of_queries').first()
     return db('cities').select('name').where('quantity_of_queries', '=', max)
 }
@@ -59,6 +61,6 @@ module.exports = {
     getWeather,
     getAverageTemp,
     getCities,
-    incrementQueries,
-    getHighestRaw: getMaxQueries
+    incrementCityQueryCounter,
+    getCityWithMaxQueries
 }

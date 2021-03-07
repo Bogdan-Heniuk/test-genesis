@@ -1,13 +1,13 @@
 const express = require('express')
-const {getCities, getWeather, getAverageTemp, incrementQueries, getHighestRaw} = require('./db/model/helper')
+const {trackCityWeatherMiddleware} = require('./middlewares')
+const {getCities, getWeather, getAverageTemp, getCityWithMaxQueries} = require('./db/model/helper')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({extended :true}))
 app.use(cors())
 
-app.get('/weather', async (req, res)=>{
-    await incrementQueries(req.query.city)
+app.get('/weather', trackCityWeatherMiddleware, async (req, res)=>{
     const weather = await getWeather(req.query.city, req.query.date)
     res.json(weather)
 })
@@ -18,13 +18,13 @@ app.get('/cities', async (req, res) => {
 })
 
 app.get('/cities/max', async (req, res) => {
-    const max = await getHighestRaw()
+    const max = await getCityWithMaxQueries()
     res.json(max)
 })
 
 
 
-app.get('/weather/temp', async (req, res)=>{
+app.get('/weather/temp', trackCityWeatherMiddleware, async (req, res)=>{
     const averageTemp = await getAverageTemp(req.query.city)
     res.json(averageTemp)
 })
