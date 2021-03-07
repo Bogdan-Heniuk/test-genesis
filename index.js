@@ -1,14 +1,10 @@
 const express = require('express')
-const {getCities, getWeather, getAverageTemp, incrementQueries, getHighestRaw} = require('./model/helper')
+const {getCities, getWeather, getAverageTemp, incrementQueries, getHighestRaw} = require('./db/model/helper')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const app = express()
 app.use(bodyParser.urlencoded({extended :true}))
 app.use(cors())
-
-app.get('/', (req, res)=>{
-    res.send(req.params)
-})
 
 app.get('/weather', async (req, res)=>{
     await incrementQueries(req.query.city)

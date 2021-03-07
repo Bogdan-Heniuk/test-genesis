@@ -1,6 +1,6 @@
 const knex = require('knex')
 const dateFormat = require("dateformat");
-const config = require('../knexfile')
+const config = require('../../knexfile')
 const db = knex(config.development)
 
 function getCities() {
