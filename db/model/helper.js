@@ -36,23 +36,27 @@ function getWeather(city, date) {
         )
         .from('weather_forecast')
         .where({name : city, calendar_date : date})
+        .first()
 }
 
 function incrementCityQueryCounter(city) {
-    return db('cities').where('name', '=', city).increment({quantity_of_queries: 1})
+    return db('cities')
+        .where('name', '=', city)
+        .increment({quantity_of_queries: 1})
 }
-
-
 
 function getCityWithMaxQueries() {
     const max = db('cities').max('quantity_of_queries').first()
-    return db('cities').select('name').where('quantity_of_queries', '=', max)
+    return db('cities').select('name')
+        .where('quantity_of_queries', '=', max)
 }
 
 function getAverageTemp(city) {
-    return db('weather_forecast').join('cities', 'cities.id', 'weather_forecast.city_id')
+    return db('weather_forecast')
+        .join('cities', 'cities.id', 'weather_forecast.city_id')
         .avg('temp as temp')
-        .where({name: city}).first()
+        .where({name: city})
+        .first()
 }
 
 module.exports = {

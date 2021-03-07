@@ -1,4 +1,5 @@
 const express = require('express')
+const PORT = 8000
 const {trackCityWeatherMiddleware} = require('./middlewares')
 const {getCities, getWeather, getAverageTemp, getCityWithMaxQueries} = require('./db/model/helper')
 const cors = require('cors')
@@ -23,12 +24,11 @@ app.get('/cities/max', async (req, res) => {
 })
 
 
-
 app.get('/weather/temp', trackCityWeatherMiddleware, async (req, res)=>{
     const averageTemp = await getAverageTemp(req.query.city)
     res.json(averageTemp)
 })
 
-app.listen(8000, () => {
-    console.log("I'm Alive")
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
 })
