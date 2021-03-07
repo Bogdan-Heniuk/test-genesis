@@ -20,3 +20,6 @@ node task1
 ```shell
 npm run start
 ```
+
+## Postman collection for testing
+`test-genesis.postman_collection.json`
