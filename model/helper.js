@@ -1,41 +1,65 @@
 const knex = require('knex')
+const dateFormat = require("dateformat");
 const config = require('../knexfile')
 const db = knex(config.development)
 
-function getUsers(){
-    return db('users').select("*")
+function getCities() {
+    return db('cities').select("*")
 }
 
-function updateUser(id, userData){
-    return db('users').where({id}).update(userData)
-}
-
-function deleteUser(id){
-    return db('users').where({id}).delete()
-}
-
-function seedWeather(weatherData, id){
+function seedWeather(weatherData, id) {
     return db('weather_forecast').insert({
-        city_id : id,
-        calendar_date : weatherData.datetimeStr,
-        conditions : weatherData.conditions,
-        temp : weatherData.temp,
-        max_temp : weatherData.maxt,
-        min_temp : weatherData.mint,
-        humidity : weatherData.humidity
+        city_id: id,
+        calendar_date: dateFormat(Date.parse(weatherData.datetimeStr), "yyyy-mm-dd"),
+        conditions: weatherData.conditions,
+        temp: weatherData.temp,
+        max_temp: weatherData.maxt,
+        min_temp: weatherData.mint,
+        humidity: weatherData.humidity
     })
 }
-function addUsersStatistic(userStatistic){
-    return db('users_statistic').insert(userStatistic)
+
+function getWeather(city, date) {
+    switch (date.replace(' ', '').toLowerCase()) {
+        case 'today' :
+            date = dateFormat(Date.now(), "yyyy-mm-dd")
+            break
+        case 'yesterday' :
+            date = dateFormat(Date.now() - 86400000, "yyyy-mm-dd")
+            break
+        default:
+            date
+    }
+
+    return db('weather_forecast').join('cities', 'cities.id', 'weather_forecast.city_id')
+        .select(
+            'city_id', 'calendar_date', 'conditions', 'temp',
+                'max_temp', 'min_temp', 'humidity'
+        )
+        .from('weather_forecast')
+        .where({name : city, calendar_date : date})
 }
 
-function getUserStatistic(date, id){
-    return db('users_statistic')
-        .join('users', 'users.id', 'users_statistic.user_id')
-        .select("*")
-        .where({date : date, user_id : id})
+function incrementQueries(city) {
+    return db('cities').where('name', '=', city).increment({quantity_of_queries: 1})
+}
+
+function getMaxQueries() {
+    const max = db('cities').max('quantity_of_queries').first()
+    return db('cities').select('name').where('quantity_of_queries', '=', max)
+}
+
+function getAverageTemp(city) {
+    return db('weather_forecast').join('cities', 'cities.id', 'weather_forecast.city_id')
+        .avg('temp')
+        .where({name: city})
 }
 
 module.exports = {
-   seedWeather
+    seedWeather,
+    getWeather,
+    getAverageTemp,
+    getCities,
+    incrementQueries,
+    getHighestRaw: getMaxQueries
 }
